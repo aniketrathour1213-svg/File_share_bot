@@ -615,24 +615,28 @@ async def run_health_server():
 # MAIN ENTRY POINT
 # ============================================================
 
+============================================================
+# MAIN ENTRY POINT
+# ============================================================
+
 async def main():
     """Bot + Health check server ek saath chalte hain"""
     logger.info("Starting bot and health check server...")
-    
-    # Render ke liye health check server (port par "OK" response)
+
+    # Render ke liye health check server
     await run_health_server()
-    
-   # Bot start
-await app.start()
 
-logger.info("✅ PYROGRAM STARTED SUCCESSFULLY")
+    # Bot start
+    await app.start()
 
-bot_user = await app.get_me()
-logger.info(f"Bot started! @{bot_user.username}")
+    logger.info("✅ PYROGRAM STARTED SUCCESSFULLY")
 
-print(f"✅ Bot is running! Telegram: @{bot_user.username}")
-print(f"✅ Health check: http://0.0.0.0:{os.environ.get('PORT', 8000)}/")
-print("📌 Dono ek saath chal rahe hain - bot Telegram se connected, health check Render ke liye")
+    bot_user = await app.get_me()
+    logger.info(f"Bot started! @{bot_user.username}")
 
-# Keep running
-await asyncio.Event().wait()
+    print(f"✅ Bot is running! Telegram: @{bot_user.username}")
+    print(f"✅ Health check: http://0.0.0.0:{os.environ.get('PORT', 8000)}/")
+    print("📌 Dono ek saath chal rahe hain - bot Telegram se connected, health check Render ke liye")
+
+    # Keep running
+    await asyncio.Event().wait()
